@@ -8,7 +8,7 @@ export default function Jobs({jobs}) {
     return (
         <div className="jobs">
             <Typography variant="h1">
-                Entry level Software jobs
+                Jobs from GitHub API
             </Typography>
             {
                 jobs.map(

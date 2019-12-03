@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
 import Jobs from './Jobs.js';
+
+const JOB_API_URL = `http://localhost:3000/jobs`;
+
 const mockJobs = [
     {
         title: 'Battery 1',
@@ -14,6 +17,13 @@ const mockJobs = [
         company: 'Faceblock'
     }
 ]
+
+async function fetchJobs() {
+    const res = await fetch(JOB_API_URL);
+    const json = await res.json();
+
+    console.log({json});
+}
 
 function App() {
   return (
