@@ -1,34 +1,24 @@
 import React from 'react';
 import './App.css';
 import Jobs from './Jobs.js';
+//stepper bug in Jobs.js 
+const JOB_API_URL = `http://localhost:3001/jobs`;
 
-const JOB_API_URL = `http://localhost:3000/jobs`;
-
-const mockJobs = [
-    {
-        title: 'Battery 1',
-        company: 'Skynet'
-    },
-    {
-        title: 'Battery 1',
-        company: 'Privacyblock'
-    }, {
-        title: 'Battery 1',
-        company: 'Faceblock'
-    }
-]
-
-async function fetchJobs() {
+async function fetchJobs(updateCb) {
     const res = await fetch(JOB_API_URL);
     const json = await res.json();
-
-    console.log({json});
+    updateCb(json);
 }
 
 function App() {
+    const [jobList, updateJobs] = React.useState([]);
+
+    React.useEffect(() => {
+        fetchJobs(updateJobs);
+    }, [])
   return (
     <div className="App">
-          <Jobs jobs={mockJobs}/>
+          <Jobs jobs={jobList}/>
     </div>
   );
 }
